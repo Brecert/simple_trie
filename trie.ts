@@ -23,11 +23,11 @@ export class Trie<V> {
   opts: ISimpleTrieParams;
   value?: V;
 
-  constructor(opts?: ISimpleTrieParams, public path: string[] = []) {
-    this.opts = {
-      pathParser: parsePath,
-      wild: opts?.wild ?? "*",
-    };
+  constructor(
+    { pathParser = parsePath, wild = "*" }: Partial<ISimpleTrieParams> = {},
+    public path: string[] = [],
+  ) {
+    this.opts = { pathParser, wild: wild };
   }
 
   get(path: string): ISimpleTrieGetResult<V> {
