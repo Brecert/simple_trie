@@ -95,24 +95,24 @@ Deno.test("add single and wildcard together", () => {
 Deno.test("class params should work", () => {
   const trie = new SimpleTrie({
     pathParser: (path: string) => path.split("::"),
-    wild: "<>"
-  })
-  let a = trie.add("<>::test::cat", "* test cat")
-  let b = trie.add("test::<>::cat", "test * cat")
-  let c = trie.add("test::cat::<>", "test cat *")
+    wild: "<>",
+  });
+  let a = trie.add("<>::test::cat", "* test cat");
+  let b = trie.add("test::<>::cat", "test * cat");
+  let c = trie.add("test::cat::<>", "test cat *");
 
   assertEquals(
     trie.get("bree::test::cat"),
-    { value: "* test cat", params: ["bree"], node: a }
-  )
+    { value: "* test cat", params: ["bree"], node: a },
+  );
 
   assertEquals(
     trie.get("test::bree::cat"),
-    { value: "test * cat", params: ["bree"], node: b }
-  )
+    { value: "test * cat", params: ["bree"], node: b },
+  );
 
   assertEquals(
     trie.get("test::cat::bree"),
-    { value: "test cat *", params: ["bree"], node: c }
-  )
-})
+    { value: "test cat *", params: ["bree"], node: c },
+  );
+});
